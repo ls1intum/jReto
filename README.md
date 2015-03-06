@@ -31,13 +31,13 @@ Note that Reto uses Java 8 features, so make sure that you have the correct JDK 
 
 There are two ways to include Reto. The simples way is to build a jar and include it in your project:
 
- 1. Build Reto using "mvn package" in the command line (e.g. in Eclipse, go to your project's properties -> Java Build Path -> Libraries)
- 2. Add the jReto-jar-with-dependencies.jar to your project.
+1. Build Reto using "mvn package" in the command line (e.g. in Eclipse, go to your project's properties -> Java Build Path -> Libraries)
+2. Add the jReto-jar-with-dependencies.jar to your project.
  
- Alternatively, you can use Maven to declare the depenency on Reto.
+Alternatively, you can use Maven to declare the depenency on Reto.
  
-  1. Since Reto is not available from one of the public maven repositories, it needs to be installed locally using "mvn install".
-  2. Add the dependency to your .pom file (groupId: de.tum.in.www1.jReto, artifactId: jReto, version: 1.0)
+1. Since Reto is not available from one of the public maven repositories, it needs to be installed locally using "mvn install".
+2. Add the dependency to your .pom file (groupId: de.tum.in.www1.jReto, artifactId: jReto, version: 1.0)
  
 Usage
 -----

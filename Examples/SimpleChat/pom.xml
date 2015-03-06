@@ -54,7 +54,7 @@
     			<artifactId>jReto</artifactId>
     			<version>1.0</version>
     			<scope>system</scope>
-    			<systemPath>${basedir}/lib/jReto-1.0-jar-with-dependencies.jar</systemPath>
+    			<systemPath>${basedir}/lib/de.tum.in.www1.jReto-1.0-jar-with-dependencies.jar</systemPath>
  	 	</dependency>
   	</dependencies>
   </dependencyManagement>

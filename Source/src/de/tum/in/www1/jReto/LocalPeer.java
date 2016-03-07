@@ -207,7 +207,7 @@ public class LocalPeer {
 	 * */
 	public void stop() {
 		if (!this.isStarted) {
-			System.err.println("You attempted to start a LocalPeer that is not started. Nothing will happen.");
+			System.err.println("You attempted to stop a LocalPeer that is not started. Nothing will happen.");
 			return;
 		}
 		

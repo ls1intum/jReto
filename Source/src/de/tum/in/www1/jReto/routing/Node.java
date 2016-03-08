@@ -162,6 +162,9 @@ public class Node implements PacketConnection.Handler {
 	@Override
 	public void onUnderlyingConnectionClose(PacketConnection connection) {
 		System.err.println("Lost routing connection: " + this);
+		//ensure that the stale underlying connection is closed. Otherwise, this will result in one-way only traffic
+		//between two peers. We will not be able to connect to a peer who had restarted via localpeer.stop() --> localPeer.Start()
+		this.router.onNeighborLost(this);
 	}
 
 	@Override

@@ -17,6 +17,8 @@ import javax.websocket.MessageHandler;
 import javax.websocket.Session;
 
 import org.glassfish.tyrus.client.ClientManager;
+import org.glassfish.tyrus.client.ClientProperties;
+
 
 import de.tum.in.www1.jReto.module.api.Address;
 import de.tum.in.www1.jReto.module.api.Advertiser;
@@ -58,7 +60,9 @@ public class RemoteP2PModule implements Module, Advertiser, Browser {
         	try {
         		URI discoveryURI = this.baseServerUri.resolve("RemoteP2P/discovery");
         		ClientEndpointConfig configuration = ClientEndpointConfig.Builder.create().build();
+			
                 ClientManager client = ClientManager.createClient();
+		client.getProperties().put(ClientProperties.LOG_HTTP_UPGRADE, true);	
         		
     			client.connectToServer(new Endpoint() {
     			    @Override
@@ -108,6 +112,7 @@ public class RemoteP2PModule implements Module, Advertiser, Browser {
 		}
 	}
 	public void onOpen() {
+		System.out.println("WebSocket connection opened ...");
 		if (this.isAdvertising) this.sendRemoteP2PPacket(RemoteP2PPacket.START_ADVERTISEMENT);
 		if (this.isBrowsing) this.sendRemoteP2PPacket(RemoteP2PPacket.START_BROWSING);
 	
@@ -134,6 +139,10 @@ public class RemoteP2PModule implements Module, Advertiser, Browser {
 		this.startedDiscoverySocket = false;
 		this.advertiserHandler.onAdvertisingStopped(this);
 		this.browserHandler.onBrowsingStopped(this, null);
+		if (closeReason.getCloseCode().equals(CloseReason.CloseCodes.GOING_AWAY)){ //idle timeout.
+			System.out.println("Reconnecting  ...");
+			startDiscoveryWebSocket();
+		}
 	}
 	public void onError(Throwable exception) {
 		System.err.println("Closed with exception: "+exception);
